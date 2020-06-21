@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="admin">
+  <%- include('./_menu.ejs') %>
+  <%  if (orders) { %>
+  <div class="align-center">
+    <h2 class="text-center">DANH SÁCH ĐƠN HÀNG</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>ID</th>
+        <th>Ngày tạo</th>
+        <th>Tên khách hàng</th>
+        <th>Số điện thoại khách hàng</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+        <th></th>
+      </tr>
+      <%  for (var item of orders) { %>
+      <tr class="datatable" onclick="window.location='./listorder?id=<%=item._id%>'">
+        <th><%=item._id%></th>
+        <td><%=new Date(item.cdate).toLocaleString()%></td>
+        <td><%=item.customer.name%></td>
+        <td><%=item.customer.phone%></td>
+        <td><%=item.total%></td>
+        <td><%=item.status%></td>
+        <td>
+          <%  if (item.status == 'Đang chờ') {  %>
+          <a href="./updatestatus?status=APPROVED&id=<%=item._id%>">Chấp thuận</a>
+          ||
+          <a href="./updatestatus?status=CANCELED&id=<%=item._id%>">Từ chối</a>
+          <%  } %>
+        </td>
+      </tr>
+      <%  } %>
+    </table>
+  </div>
+  <%  } %>
+  <%  if (order) { %>
+  <div class="align-center">
+    <h2 class="text-center">CHI TIẾT ĐƠN HÀNG</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>#</th>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Hình ảnh</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+      </tr>
+      <%  for (var [i, item] of order.items.entries()) {  %>
+      <tr class="datatable">
+        <td><%=(i+1)%></td>
+        <td><%=item.product._id%></td>
+        <td><%=item.product.name%></td>
+        <td><img src="data:image/jpg;base64,<%=item.product.image%>" width="70" height="70" /></td>
+        <td><%=item.product.price%></td>
+        <td><%=item.quantity%></td>
+        <td><%=item.product.price * item.quantity%></td>
+      </tr>
+      <%  } %>
+    </table>
+  </div>
+  <%  } %>
+</body>
+
+</html>

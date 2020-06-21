@@ -1,0 +1,99 @@
+<html>
+
+<head>
+  <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="admin">
+  <%- include('./_menu.ejs') %>
+  <%  if (custs) { %>
+  <div class="align-center">
+    <h2 class="text-center">DANH SÁCH KHÁCH HÀNG</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Tên khách hàng</th>
+        <th>Số điện thoại</th>
+        <th>Email</th>
+        <th>Active</th>
+        <th>Xóa</th>
+      </tr>
+      <%  for (var item of custs) { %>
+      <tr class="datatable" onclick="window.location='./listcustomer?cid=<%=item._id%>'">
+        <th><%=item._id%></th>
+        <td><%=item.username%></td>
+        <td><%=item.password%></td>
+        <td><%=item.name%></td>
+        <td><%=item.phone%></td>
+        <td><%=item.email%></td>
+        <td><%=item.active%></td>
+        <td>
+          <% if (item.active == 0) { %>
+          <a href="./sendmail?id=<%=item._id%>">EMAIL</a>
+          <% } else if (item.active == 1) { %>
+          <a href="./deactive?id=<%=item._id%>&token=<%=item.token%>"
+            onclick="return confirm('Bạn có muốn xóa ?')">DEACTIVE</a>
+          <% } %>
+        </td>
+      </tr>
+      <%  } %>
+    </table>
+  </div>
+  <%  } %>
+  <%  if (orders) { %>
+  <div class="align-center">
+    <h2 class="text-center">DANH SÁCH ĐƠN HÀNG</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>ID</th>
+        <th>Ngày tạo</th>
+        <th>Tên khách hàng</th>
+        <th>Số điện thoại khách hàng</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+      </tr>
+      <%  for (var item of orders) { %>
+      <tr class="datatable" onclick="window.location='./listcustomer?cid=<%=custID%>&oid=<%=item._id%>'">
+        <th><%=item._id%></th>
+        <td><%=new Date(item.cdate).toLocaleString()%></td>
+        <td><%=item.customer.name%></td>
+        <td><%=item.customer.phone%></td>
+        <td><%=item.total%></td>
+        <td><%=item.status%></td>
+      </tr>
+      <%  } %>
+    </table>
+  </div>
+  <%  } %>
+  <%  if (order) { %>
+  <div class="align-center">
+    <h2 class="text-center">CHI TIẾT ĐƠN HÀNG</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>#</th>
+        <th>ID sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Hình ảnh</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Tổng tiền</th>
+      </tr>
+      <%  for (var [i, item] of order.items.entries()) {  %>
+      <tr class="datatable">
+        <td><%=(i+1)%></td>
+        <td><%=item.product._id%></td>
+        <td><%=item.product.name%></td>
+        <td><img src="data:image/jpg;base64,<%=item.product.image%>" width="70" height="70" /></td>
+        <td><%=item.product.price%></td>
+        <td><%=item.quantity%></td>
+        <td><%=item.product.price * item.quantity%></td>
+      </tr>
+      <%  } %>
+    </table>
+  </div>
+  <%  } %>
+</body>
+
+</html>

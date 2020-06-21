@@ -1,0 +1,10 @@
+.datatable {
+  text-align: center;
+  border-collapse: collapse;
+}
+/* header */
+tr:first-child.datatable {
+  background-color: #ff3c00;
+}
+
+

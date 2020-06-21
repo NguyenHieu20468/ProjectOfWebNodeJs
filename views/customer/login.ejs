@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="customer">
+  <%- include('./_menu.ejs') %>
+  <%- include('./_inform.ejs') %>
+  <div class="align-center">
+    <h2 class="text-center">ĐĂNG NHẬP</h2>
+    <form action="./login" method="POST">
+      <table class="align-center">
+        <tr>
+          <td>Username</td>
+          <td><input type="text" name="txtUsername" required /></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="password" name="txtPassword" required /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="LOGIN" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><a href="./signup">Đăng kí</a> tài khoản mới</td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</body>
+
+</html>

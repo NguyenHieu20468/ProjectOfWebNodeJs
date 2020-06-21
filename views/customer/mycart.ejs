@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="customer">
+  <%- include('./_menu.ejs') %>
+  <%- include('./_inform.ejs') %>
+  <div class="align-center">
+    <h2 class="text-center">DANH SÁCH SẢN PHẨM</h2>
+    <table class="datatable" border="1">
+      <tr class="datatable">
+        <th>#</th>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Danh mục</th>
+        <th>Hình ảnh</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th>Xóa ?</th>
+      </tr>
+      <%  for (var [i, item] of session.mycart.entries()) { %>
+      <tr class="datatable">
+        <td><%=(i+1)%></td>
+        <th><%=item.product._id%></th>
+        <td><%=item.product.name%></td>
+        <td><%=item.product.category.name%></td>
+        <td><img src="data:image/jpg;base64,<%=item.product.image%>" width="70" height="70" /></td>
+        <td><%=item.product.price%></td>
+        <td><%=item.quantity%></td>
+        <td><%=item.product.price * item.quantity%></td>
+        <td><a href="./remove2cart?id=<%=item.product._id%>">Xóa</a></td>
+      </tr>
+      <%  } %>
+      <tr>
+        <td colspan="6"></td>
+        <td>Tổng tiền</td>
+        <td><%=total%></td>
+        <td><a href="./checkout" onclick="return confirm('Bạn có chắc chắn muốn mua ?')">Mua Hàng</a></td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>
