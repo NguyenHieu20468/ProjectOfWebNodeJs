@@ -3,7 +3,9 @@ Sử dụng Nodejs + Express + Mongodb
 Tên đồ án: Website bán quần áo HNLP Fashion
 Thành viên:
 Nguyễn Hiếu
-
+Trần Nguyễn Bảo Ngọc
+Nguyễn Hoàng Long
+Lê Thiên Phúc
 
 Các chức năng
 - Admin quản lý sản phẩm xem danh sách đơn hàng.
