@@ -13,3 +13,10 @@ Các chức năng
 - TÌm kiếm , lọc sản phẩm
 - Hiển thị thông tin sản phẩm, đánh giá sản phẩm
 - Mail xác thực tài khoản và reset mật khẩu
+
+Danh sách các tài khoản Admin (Username/Password)
+- Snipe/123
+- Hieu/123
+- Long/123
+- Ngoc/123
+
